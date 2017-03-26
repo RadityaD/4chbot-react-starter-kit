@@ -21,13 +21,13 @@ let threads = [];
 const chanThreads = {
   type: new List(ChanThreadsType),
   args: {
-  	id: { type: StringType }
+  	board: { type: StringType }
   },
-  resolve() {
-    fetch(`https://a.4cdn.org/${args.id}/threads.json`)
+  resolve(root, args) {
+    fetch(`https://a.4cdn.org/${args.board}/threads.json`)
     .then(res => res.json())
     .then((data) => {
-      threads = data.threads;
+      threads = data;
     })
     return threads;
   },

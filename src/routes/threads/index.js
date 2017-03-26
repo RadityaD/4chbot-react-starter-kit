@@ -13,15 +13,25 @@ import Layout from '../../components/Layout';
 import BoardSelection from '../../components/BoardSelection';
 
 export default {
-  path: '/threads/:id',
+  path: '/threads/:board',
   async action(params) {
-    const resp = await fetch('/graphql?query={chanBoards{board,title}}')
+    const resp = await fetch('/graphql', {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: `{chanThreads(board:"${params.params.board}"){threads{no}}}`,
+        }),
+        credentials: 'include',
+      });
     const { data } = await resp.json();
-    console.log(params.params.id);
-    // if (!data || !data.chanBoards) throw new Error('Failed to load the news feed.');
+    console.log(data);
+    // if (!data || !data.chanThreads) throw new Error('Failed to load the news feed.');
     return {
       title: '4Chan Webhook',
-      component: <Layout><pre>ABCDE</pre></Layout>,
+      component: <Layout><pre>abcde</pre></Layout>,
     };
   },
 

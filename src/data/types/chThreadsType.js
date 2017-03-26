@@ -11,12 +11,20 @@ import {
   GraphQLObjectType as ObjectType,
   GraphQLString as StringType,
   GraphQLNonNull as NonNull,
+  GraphQLList as List,
 } from 'graphql';
 
 const ChanThreadsType = new ObjectType({
   name: 'Threads',
   fields: {
-    no: { type: new NonNull(StringType) },
+    threads: {
+    	type: new List(new ObjectType({
+    		name: 'no',
+    		fields: {
+    			no: { type: new NonNull(StringType) }
+    		}
+    	}))
+	},
   },
 });
 
