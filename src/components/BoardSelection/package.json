@@ -1,0 +1,6 @@
+{
+  "name": "4chBoardSelection",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./BoardSelection.js"
+}
